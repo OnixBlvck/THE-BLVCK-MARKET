@@ -31,7 +31,7 @@ export function SiteFooter() {
         </div>
 
         <p
-          aria-label={`${BRAND} × ${AFFILIATE}`}
+          aria-hidden="true"
           className="font-wide text-silver mt-20 select-none text-[11vw] font-black uppercase leading-[0.85] tracking-tighter lg:text-[8.5rem]"
         >
           {BRAND}
