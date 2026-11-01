@@ -36,8 +36,8 @@ function Field({
   errorId,
 }: {
   label: string;
-  optional?: boolean;
-  error?: string;
+  optional?: boolean | undefined;
+  error?: string | undefined;
   children: ReactNode;
   htmlFor: string;
   errorId: string;
