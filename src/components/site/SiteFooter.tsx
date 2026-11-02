@@ -38,10 +38,14 @@ export function SiteFooter() {
         </p>
 
         <div className="mt-8 flex flex-col gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="eyebrow">
-            {BRAND} <span className="text-primary-glow">×</span> {AFFILIATE}
-            <span className="ml-2 text-muted-foreground/70">— {AFFILIATE} · {AFFILIATE_ROLE}</span>
-          </p>
+          <div className="space-y-2">
+            <p className="eyebrow">
+              {BRAND} <span className="text-primary-glow">×</span> {AFFILIATE}
+            </p>
+            <p className="eyebrow text-muted-foreground/70">
+              {AFFILIATE} — {AFFILIATE_ROLE}
+            </p>
+          </div>
           <p className="eyebrow">© {new Date().getFullYear()} {BRAND}</p>
         </div>
       </div>
