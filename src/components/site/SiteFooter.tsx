@@ -1,4 +1,4 @@
-import { AFFILIATE, BRAND, NAV_LINKS } from "@/content/site";
+import { AFFILIATE, AFFILIATE_ROLE, BRAND, NAV_LINKS } from "@/content/site";
 import { Wordmark } from "./SiteHeader";
 
 export function SiteFooter() {
@@ -40,6 +40,7 @@ export function SiteFooter() {
         <div className="mt-8 flex flex-col gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="eyebrow">
             {BRAND} <span className="text-primary-glow">×</span> {AFFILIATE}
+            <span className="ml-2 text-muted-foreground/70">— {AFFILIATE} · {AFFILIATE_ROLE}</span>
           </p>
           <p className="eyebrow">© {new Date().getFullYear()} {BRAND}</p>
         </div>
