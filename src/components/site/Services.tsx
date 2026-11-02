@@ -15,7 +15,7 @@ export function Services({ onRequestProposal }: { onRequestProposal: (pkg: Packa
             index="03"
             eyebrow="Services"
             title="Three ways in. Pick your weight class."
-            intro="Every engagement is scoped to your business. Request a proposal and we will come back with a clear plan and pricing for your situation."
+            intro="The Three-Phase Program is offered in three packages. Every engagement is scoped to your business. Request a proposal and we will come back with a clear plan and pricing for your situation."
           />
         </Reveal>
 
