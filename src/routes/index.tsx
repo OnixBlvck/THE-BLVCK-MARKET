@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { About } from "@/components/site/About";
-import { BlackFactory } from "@/components/site/BlackFactory";
+import { ThreePhaseProgram } from "@/components/site/ThreePhaseProgram";
 import { Contact, type InquiryPreset } from "@/components/site/Contact";
 import { FoundingOffer } from "@/components/site/FoundingOffer";
 import { Hero } from "@/components/site/Hero";
@@ -16,7 +16,7 @@ import type { PackageName } from "@/content/site";
 
 const TITLE = "BLVCK MARKET — Marketing, Brand Visibility & Creative Promotion";
 const DESCRIPTION =
-  "BLVCK MARKET helps businesses sharpen their presentation, plan campaigns, reach customers, and understand performance. Introducing The Black Factory Phase program.";
+  "BLVCK MARKET helps businesses sharpen their presentation, plan campaigns, reach customers, and understand performance. Introducing The Three-Phase Program.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -66,7 +66,7 @@ function Index() {
       <SiteHeader />
       <main id="main">
         <Hero />
-        <BlackFactory />
+        <ThreePhaseProgram />
         <About />
         <Services onRequestProposal={requestProposal} />
         <Method />

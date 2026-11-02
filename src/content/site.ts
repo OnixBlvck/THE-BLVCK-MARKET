@@ -1,8 +1,14 @@
 /**
  * BLVCK MARKET homepage content.
  *
- * Approved, fixed wording: brand name, affiliation lockup, the grand-opening
- * program line, the three package names, and the founding-offer terms.
+ * Brand architecture:
+ * - BLVCK MARKET is the business and the website.
+ * - The Three-Phase Program is the program/methodology inside BLVCK MARKET.
+ * - THE BLVCK EFFECT describes the transformation/results — not a brand or package.
+ * - VONTEVISUALZ is the creative partner / production hub.
+ *
+ * Approved, fixed wording: brand name, affiliation lockup, program name,
+ * the three package names, and the founding-offer terms.
  * Everything else is draft homepage marketing copy — not an established
  * slogan or quotation — and can be revised freely.
  */
@@ -10,10 +16,16 @@
 export const BRAND = "BLVCK MARKET";
 export const AFFILIATE = "VONTEVISUALZ";
 export const LOCKUP = `${BRAND} × ${AFFILIATE}`;
+export const AFFILIATE_ROLE = "Creative partner & production hub";
 
-/** Approved program wording — preserve exactly. */
-export const PROGRAM_NAME = "THE BLACK FACTORY PHASE";
-export const GRAND_OPENING_LINE = "BLVCK MARKET GRAND OPENING INTRODUCING: THE BLACK FACTORY PHASE PROGRAM";
+/** Program/methodology inside BLVCK MARKET — not the business name. */
+export const PROGRAM_NAME = "THE THREE-PHASE PROGRAM";
+export const GRAND_OPENING_LINE = `${BRAND} GRAND OPENING INTRODUCING: ${PROGRAM_NAME}`;
+
+/** Describes the transformation/results — not a separate brand or package. */
+export const RESULT_NAME = "THE BLVCK EFFECT";
+export const RESULT_LINE = "Helping businesses become noticed, understood, seen, and explained.";
+export const RESULT_WORDS = ["Noticed", "Understood", "Seen", "Explained"];
 
 /** DRAFT homepage marketing copy — not an established brand quotation. */
 export const DRAFT_HERO_HEADLINE = {
@@ -23,7 +35,7 @@ export const DRAFT_HERO_HEADLINE = {
 
 export type SectionId =
   | "home"
-  | "black-factory"
+  | "program"
   | "about"
   | "services"
   | "method"
@@ -34,7 +46,7 @@ export type SectionId =
 
 export const NAV_LINKS: { id: SectionId; label: string }[] = [
   { id: "home", label: "Home" },
-  { id: "black-factory", label: "The Black Factory Phase" },
+  { id: "program", label: "The Three-Phase Program" },
   { id: "services", label: "Services" },
   { id: "method", label: "Method" },
   { id: "insights", label: "Insights" },
@@ -44,7 +56,7 @@ export const NAV_LINKS: { id: SectionId; label: string }[] = [
 export const PACKAGE_NAMES = [
   "VISIBILITY UPGRADE",
   "COMPLETE TAKEOVER",
-  "VISIBILITY AUTOPILOT",
+  "AUTOPILOT",
 ] as const;
 
 export type PackageName = (typeof PACKAGE_NAMES)[number];
@@ -80,7 +92,7 @@ export const PACKAGES: {
   },
   {
     index: "03",
-    name: "VISIBILITY AUTOPILOT",
+    name: "AUTOPILOT",
     summary: "Ongoing support that keeps your promotion, prospecting, and tracking moving month over month.",
     includes: [
       "Ongoing promotional support",

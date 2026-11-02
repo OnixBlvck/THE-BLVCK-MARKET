@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 
-import blackFactory from "@/assets/black-factory.jpg";
 import { Button } from "@/components/ui/button";
+import { BRAND, RESULT_LINE, RESULT_NAME, RESULT_WORDS } from "@/content/site";
 import { DripText } from "./DripText";
 import { PetalField } from "./PetalField";
 import { Reveal } from "./Reveal";
@@ -24,11 +24,11 @@ const PILLARS = [
   },
 ];
 
-export function BlackFactory() {
+export function ThreePhaseProgram() {
   return (
     <section
-      id="black-factory"
-      aria-labelledby="black-factory-title"
+      id="program"
+      aria-labelledby="program-title"
       className="relative isolate overflow-hidden border-y border-border bg-surface"
     >
       <div className="bg-blue-light absolute inset-0 -z-10 opacity-70" aria-hidden="true" />
@@ -42,17 +42,19 @@ export function BlackFactory() {
             Grand opening
           </p>
 
-          <h2 id="black-factory-title" className="mt-8 uppercase">
+          <h2 id="program-title" className="mt-8 uppercase">
             <span className="font-mono block text-xs tracking-[0.28em] text-silver sm:text-sm">
-              BLVCK MARKET Grand Opening
+              {BRAND} Grand Opening
             </span>
             <span className="font-mono mt-3 block text-xs tracking-[0.28em] text-muted-foreground sm:text-sm">
               Introducing:
             </span>
             <span className="font-wide mt-5 block text-[2.75rem] font-black leading-[0.88] tracking-tight sm:text-7xl lg:text-8xl">
-              <DripText className="text-glow">The Black</DripText>
+              <span className="text-silver">The</span>
               <br />
-              <span className="text-silver">Factory Phase</span>
+              <span className="text-glow">Three-</span>
+              <br />
+              <DripText className="text-glow">Phase</DripText>
             </span>
             <span className="font-wide mt-6 block text-xl font-bold tracking-[0.4em] text-gold sm:text-2xl">
               Program
@@ -60,9 +62,9 @@ export function BlackFactory() {
           </h2>
 
           <p className="mt-10 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            The Black Factory Phase is BLVCK MARKET&apos;s featured grand-opening program. It is built for
-            businesses ready to sharpen how they present themselves, build a real promotional direction,
-            and go after better visibility in their market.
+            The Three-Phase Program is the method inside {BRAND}. It is built for businesses ready to
+            sharpen how they present themselves, build a real promotional direction, and go after better
+            visibility in their market.
           </p>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-foreground">
             No inflated promises. Focused work, honest reporting, and a clear next move.
@@ -82,18 +84,30 @@ export function BlackFactory() {
 
         <Reveal className="lg:col-span-5" delay={150}>
           <figure className="relative">
-            <div className="shadow-glow-lg overflow-hidden rounded-sm border border-border">
-              <img
-                src={blackFactory}
-                alt="A black rose with gold-lit thorns inside a dark factory, a single blue petal on steel"
-                width={1280}
-                height={1600}
-                loading="lazy"
-                className="aspect-[4/5] w-full object-cover"
-              />
+            <div className="shadow-glow-lg relative flex aspect-[4/5] flex-col justify-between overflow-hidden rounded-sm border border-border bg-background p-7 sm:p-10">
+              <div className="bg-blue-light absolute inset-0 opacity-80" aria-hidden="true" />
+              <p className="eyebrow relative">The result</p>
+              <div className="relative">
+                <p className="font-wide text-4xl font-black uppercase leading-[0.9] tracking-tight sm:text-5xl">
+                  <span className="text-silver block">The</span>
+                  <span className="text-glow block">BLVCK</span>
+                  <span className="block">Effect</span>
+                </p>
+                <p className="mt-6 max-w-xs text-sm leading-relaxed text-muted-foreground">{RESULT_LINE}</p>
+              </div>
+              <ul className="relative grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-border bg-border">
+                {RESULT_WORDS.map((word) => (
+                  <li key={word} className="font-mono whitespace-nowrap bg-background px-3 py-3 text-[0.6875rem] uppercase tracking-[0.12em] sm:px-4 sm:text-xs sm:tracking-[0.18em]">
+                    <span className="text-primary-glow" aria-hidden="true">
+                      ◆{" "}
+                    </span>
+                    {word}
+                  </li>
+                ))}
+              </ul>
             </div>
             <figcaption className="eyebrow mt-4 flex justify-between">
-              <span>Phase 01</span>
+              <span>{RESULT_NAME}</span>
               <span className="text-primary-glow">Now open</span>
             </figcaption>
           </figure>
