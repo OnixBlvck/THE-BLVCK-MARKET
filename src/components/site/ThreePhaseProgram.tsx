@@ -52,7 +52,9 @@ export function ThreePhaseProgram() {
             <span className="font-wide mt-5 block text-[2.75rem] font-black leading-[0.88] tracking-tight sm:text-7xl lg:text-8xl">
               <span className="text-silver">The</span>
               <br />
-              <DripText className="text-glow">Three-Phase</DripText>
+              <span className="text-glow">Three-</span>
+              <br />
+              <DripText className="text-glow">Phase</DripText>
             </span>
             <span className="font-wide mt-6 block text-xl font-bold tracking-[0.4em] text-gold sm:text-2xl">
               Program
@@ -95,7 +97,7 @@ export function ThreePhaseProgram() {
               </div>
               <ul className="relative grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-border bg-border">
                 {RESULT_WORDS.map((word) => (
-                  <li key={word} className="font-mono bg-background px-4 py-3 text-xs uppercase tracking-[0.18em]">
+                  <li key={word} className="font-mono whitespace-nowrap bg-background px-3 py-3 text-[0.6875rem] uppercase tracking-[0.12em] sm:px-4 sm:text-xs sm:tracking-[0.18em]">
                     <span className="text-primary-glow" aria-hidden="true">
                       ◆{" "}
                     </span>
