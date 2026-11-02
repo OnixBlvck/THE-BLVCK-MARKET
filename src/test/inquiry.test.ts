@@ -15,11 +15,11 @@ const valid = {
 
 describe("BLVCK MARKET content rules", () => {
   it("offers exactly the three approved packages, in order", () => {
-    expect(PACKAGES.map((p) => p.name)).toEqual(["VISIBILITY UPGRADE", "COMPLETE TAKEOVER", "VISIBILITY AUTOPILOT"]);
+    expect(PACKAGES.map((p) => p.name)).toEqual(["VISIBILITY UPGRADE", "COMPLETE TAKEOVER", "AUTOPILOT"]);
   });
 
   it("keeps the approved grand-opening program wording", () => {
-    expect(GRAND_OPENING_LINE).toBe("BLVCK MARKET GRAND OPENING INTRODUCING: THE BLACK FACTORY PHASE PROGRAM");
+    expect(GRAND_OPENING_LINE).toBe("BLVCK MARKET GRAND OPENING INTRODUCING: THE THREE-PHASE PROGRAM");
   });
 
   it("states the founding offer terms exactly", () => {
@@ -33,7 +33,7 @@ describe("Inquiry form", () => {
     expect([...PACKAGE_INTEREST_OPTIONS]).toEqual([
       "VISIBILITY UPGRADE",
       "COMPLETE TAKEOVER",
-      "VISIBILITY AUTOPILOT",
+      "AUTOPILOT",
       "Not sure yet",
     ]);
   });

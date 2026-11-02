@@ -59,7 +59,7 @@ export function Hero() {
         </div>
 
         <a
-          href="#black-factory"
+          href="#program"
           className="group mt-14 flex max-w-xl items-center gap-4 border-t border-border pt-6 text-left"
         >
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-border transition-colors group-hover:border-primary-glow">
