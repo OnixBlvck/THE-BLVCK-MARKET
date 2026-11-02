@@ -28,9 +28,24 @@ describe("BLVCK MARKET content rules", () => {
     expect(PROGRAM_NAME).toBe("THE THREE-PHASE PROGRAM");
   });
 
-  it("never uses Factory wording anywhere in site content", () => {
+  it("never uses prohibited brand wording in site content or any page/component source", () => {
+    // Guard list: these words must never appear on the site.
+    const prohibited = /factory|tattoo|inknior|ink nior/i;
+    expect(JSON.stringify(site)).not.toMatch(prohibited);
+    const sources = import.meta.glob(["/src/routes/**/*.tsx", "/src/components/site/**/*.tsx", "/src/content/**/*.ts"], {
+      query: "?raw",
+      import: "default",
+      eager: true,
+    }) as Record<string, string>;
+    expect(Object.keys(sources).length).toBeGreaterThan(5);
+    for (const [file, text] of Object.entries(sources)) {
+      expect(`${file}: ${text}`).not.toMatch(prohibited);
+    }
+  });
+
+  it("never presents FastCutEdits or ONYX BLVCK as BLVCK MARKET services", () => {
     const all = JSON.stringify(site);
-    expect(all).not.toMatch(/factory/i);
+    expect(all).not.toMatch(/fastcut|onyx/i);
   });
 
   it("keeps THE BLVCK EFFECT as the result, not a package", () => {
