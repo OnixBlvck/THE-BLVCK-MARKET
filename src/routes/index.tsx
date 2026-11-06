@@ -1,18 +1,12 @@
-import { useCallback, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { About } from "@/components/site/About";
-import { ThreePhaseProgram } from "@/components/site/ThreePhaseProgram";
 import { Contact, type InquiryPreset } from "@/components/site/Contact";
-import { FoundingOffer } from "@/components/site/FoundingOffer";
 import { Hero } from "@/components/site/Hero";
-import { Method } from "@/components/site/Method";
-import { Reporting } from "@/components/site/Reporting";
-import { Services } from "@/components/site/Services";
+import { IntroBands } from "@/components/site/IntroBands";
+import { ServiceColumns } from "@/components/site/ServiceColumns";
+import { SignatureBand } from "@/components/site/SignatureBand";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
-import { Work } from "@/components/site/Work";
-import type { PackageName } from "@/content/site";
 
 const TITLE = "BLVCK MARKET — Marketing, Brand Visibility & Creative Promotion";
 const DESCRIPTION =
@@ -34,26 +28,8 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function scrollToContact() {
-  const target = document.getElementById("contact");
-  if (!target) return;
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-  window.history.replaceState(null, "", "#contact");
-}
-
 function Index() {
-  const [preset, setPreset] = useState<InquiryPreset | null>(null);
-
-  const requestProposal = useCallback((pkg: PackageName) => {
-    setPreset({ packageInterest: pkg, nonce: Date.now() });
-    scrollToContact();
-  }, []);
-
-  const claimFounding = useCallback(() => {
-    setPreset({ foundingOffer: true, nonce: Date.now() });
-    scrollToContact();
-  }, []);
+  const preset: InquiryPreset | null = null;
 
   return (
     <>
@@ -66,13 +42,9 @@ function Index() {
       <SiteHeader />
       <main id="main">
         <Hero />
-        <ThreePhaseProgram />
-        <About />
-        <Services onRequestProposal={requestProposal} />
-        <Method />
-        <Reporting />
-        <FoundingOffer onClaim={claimFounding} />
-        <Work />
+        <IntroBands />
+        <ServiceColumns />
+        <SignatureBand />
         <Contact preset={preset} />
       </main>
       <SiteFooter />
