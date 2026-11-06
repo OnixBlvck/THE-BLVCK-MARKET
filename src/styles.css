@@ -19,6 +19,9 @@
   --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
   --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-gothic: "UnifrakturCook", "Old English Text MT", serif;
+  --font-heading: "Cinzel", ui-serif, Georgia, serif;
+  --font-script: "Pinyon Script", cursive;
 
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);

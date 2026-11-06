@@ -33,25 +33,57 @@ export const DRAFT_HERO_HEADLINE = {
   close: "MAKE YOUR BRAND IMPOSSIBLE TO IGNORE.",
 };
 
-export type SectionId =
-  | "home"
-  | "program"
-  | "about"
-  | "services"
-  | "method"
-  | "insights"
-  | "founding"
-  | "work"
-  | "contact";
+export type SectionId = "home" | "about" | "services" | "program" | "partnerships" | "contact";
 
 export const NAV_LINKS: { id: SectionId; label: string }[] = [
   { id: "home", label: "Home" },
-  { id: "program", label: "The Three-Phase Program" },
+  { id: "about", label: "About" },
   { id: "services", label: "Services" },
-  { id: "method", label: "Method" },
-  { id: "insights", label: "Insights" },
+  { id: "program", label: "Program" },
+  { id: "partnerships", label: "Partnerships" },
   { id: "contact", label: "Contact" },
 ];
+
+/** Homepage layout copy (draft wording following the supplied layout reference). */
+export const HEADER_CTA = `JOIN THE ${BRAND}`;
+export const HERO_TAGLINE = "EXCLUSIVE. INTENTIONAL. TRANSFORMATIVE.";
+
+export const ABOUT_BAND = {
+  label: "About",
+  heading: ["WE BUILD LEGACIES", "IN THE DARK."],
+  body: `${BRAND} is a private creative intelligence and brand development studio. We engineer identity, influence, and impact for businesses ready to be noticed.`,
+  cta: "Our story",
+};
+
+export const PROGRAM_BAND = {
+  label: PROGRAM_NAME,
+  heading: "A JOURNEY. A SYSTEM. A BECOMING.",
+  body: `Three phases that move your business from unseen to understood. The result is ${RESULT_NAME}.`,
+  cta: "View the phases",
+};
+
+export const SERVICE_COLUMNS = [
+  { icon: "eye", title: "BRAND INTELLIGENCE", body: "Research into your market, audience, and competitors before a single move is made." },
+  { icon: "pen", title: "CREATIVE DEVELOPMENT", body: "Visual direction and promotional creative that make your brand recognizable." },
+  { icon: "target", title: "STRATEGIC ACTIVATION", body: "Campaigns and outreach planned, launched, and tracked with intent." },
+  { icon: "key", title: "PRIVATE ADVISORY", body: "Direct guidance on positioning, priorities, and what the data says next." },
+] as const;
+
+export const SIGNATURE_BAND = {
+  label: "Featured",
+  heading: "SIGNATURE MARK",
+  body: "The Blue Rose. Symbol of transformation, rarity, and unseen power.",
+  script: "Blvck Market",
+};
+
+export const PARTNERSHIPS_BAND = {
+  label: "Partnerships",
+  heading: "ALIGN. ELEVATE. EXPAND.",
+  body: `${BRAND} works alongside ${AFFILIATE}, its creative partner and production hub.`,
+  cta: "View partners",
+};
+
+export const FOOTER_TAGLINE = "Noticed. Understood. Seen. Explained.";
 
 export const PACKAGE_NAMES = [
   "VISIBILITY UPGRADE",
