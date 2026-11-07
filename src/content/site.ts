@@ -85,6 +85,15 @@ export const PARTNERSHIPS_BAND = {
 
 export const FOOTER_TAGLINE = "Noticed. Understood. Seen. Explained.";
 
+export const INQUIRY_COPY = {
+  receivedLabel: "Inquiry received",
+  receivedHeading: "Received.",
+  receivedBody: "Your inquiry has been securely saved for review. Email notifications are not configured yet.",
+  failed: "Your inquiry could not be saved. Your details are still here — please try again.",
+  privacy: "Your inquiry is saved privately for review. Email notifications are not configured yet.",
+  submitting: "Saving inquiry…",
+};
+
 export const PACKAGE_NAMES = [
   "VISIBILITY UPGRADE",
   "COMPLETE TAKEOVER",
