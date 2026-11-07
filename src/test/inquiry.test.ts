@@ -6,14 +6,14 @@ import { PACKAGE_INTEREST_OPTIONS, inquirySchema, submitInquiry } from "@/lib/in
 
 const { persist } = vi.hoisted(() => ({ persist: vi.fn() }));
 vi.mock("@/lib/inquiry.functions", () => ({ persistInquiry: persist }));
-beforeEach(() => persist.mockReset());
+beforeEach(() => { persist.mockReset(); });
 
 const valid = {
   name: "Jordan Lee",
   business: "Northside Coffee",
   email: "jordan@example.com",
   website: "",
-  packageInterest: "COMPLETE TAKEOVER",
+  packageInterest: "COMPLETE TAKEOVER" as const,
   foundingOffer: true,
   message: "We want more local foot traffic this spring.",
 };
