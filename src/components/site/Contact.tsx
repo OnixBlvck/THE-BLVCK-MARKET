@@ -1,14 +1,15 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AlertTriangle, ArrowRight, Check, Copy } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
+import { INQUIRY_COPY } from "@/content/site";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
   PACKAGE_INTEREST_OPTIONS,
-  formatInquiry,
   inquirySchema,
   submitInquiry,
   type Inquiry,
@@ -61,8 +62,9 @@ function Field({
 export function Contact({ preset }: { preset: InquiryPreset | null }) {
   const uid = useId();
   const statusRef = useRef<HTMLDivElement>(null);
-  const [result, setResult] = useState<{ inquiry: Inquiry; delivered: boolean } | null>(null);
-  const [copied, setCopied] = useState(false);
+  const [result, setResult] = useState<{ delivered: true } | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const sendInquiry = useServerFn(submitInquiry);
 
   const {
     register,
@@ -72,7 +74,7 @@ export function Contact({ preset }: { preset: InquiryPreset | null }) {
     formState: { errors, isSubmitting },
   } = useForm<InquiryInput, unknown, Inquiry>({
     resolver: zodResolver(inquirySchema),
-    defaultValues: { name: "", business: "", email: "", website: "", message: "", foundingOffer: false },
+    defaultValues: { name: "", business: "", email: "", website: "", message: "", foundingOffer: false, contactFax: "" },
   });
 
   useEffect(() => {
@@ -87,18 +89,13 @@ export function Contact({ preset }: { preset: InquiryPreset | null }) {
   }, [result]);
 
   const onSubmit = async (inquiry: Inquiry) => {
-    const outcome = await submitInquiry(inquiry);
-    setCopied(false);
-    setResult({ inquiry, delivered: outcome.delivered });
-  };
-
-  const copyInquiry = async () => {
-    if (!result) return;
+    setSubmitError(null);
     try {
-      await navigator.clipboard.writeText(formatInquiry(result.inquiry));
-      setCopied(true);
+      const outcome = await sendInquiry(inquiry);
+      if (outcome.delivered) setResult({ delivered: true });
+      else setSubmitError(INQUIRY_COPY.failed);
     } catch {
-      setCopied(false);
+      setSubmitError(INQUIRY_COPY.failed);
     }
   };
 
@@ -135,42 +132,10 @@ export function Contact({ preset }: { preset: InquiryPreset | null }) {
               role="status"
               className="rounded-sm border border-gold/40 bg-surface p-7 outline-none sm:p-10"
             >
-              {result.delivered ? (
-                <>
-                  <p className="eyebrow text-success">Inquiry sent</p>
-                  <h3 className="font-wide mt-4 text-2xl font-black uppercase">Received.</h3>
-                  <p className="mt-4 text-muted-foreground">Thanks — we'll review it and follow up.</p>
-                </>
-              ) : (
-                <>
-                  <p className="eyebrow flex items-center gap-2 text-gold">
-                    <AlertTriangle className="h-4 w-4" aria-hidden="true" />
-                    Not sent — online delivery not connected yet
-                  </p>
-                  <h3 className="font-wide mt-4 text-2xl font-black uppercase leading-tight sm:text-3xl">
-                    Your inquiry is ready, {result.inquiry.name.split(" ")[0]}.
-                  </h3>
-                  <p className="mt-4 leading-relaxed text-muted-foreground">
-                    Everything checks out, but this form is not yet connected to an inbox, so{" "}
-                    <strong className="text-foreground">nothing was sent</strong>. Copy your inquiry to keep
-                    it on hand until the contact channel goes live.
-                  </p>
-                  <pre className="mt-6 max-h-60 overflow-auto whitespace-pre-wrap rounded-sm border border-border bg-background p-4 font-mono text-xs leading-relaxed text-silver">
-                    {formatInquiry(result.inquiry)}
-                  </pre>
-                </>
-              )}
+              <p className="eyebrow text-success">{INQUIRY_COPY.receivedLabel}</p>
+              <h3 className="font-wide mt-4 text-2xl font-black uppercase">{INQUIRY_COPY.receivedHeading}</h3>
+              <p className="mt-4 text-muted-foreground">{INQUIRY_COPY.receivedBody}</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                {!result.delivered ? (
-                  <Button variant="hero" size="xl" onClick={copyInquiry}>
-                    {copied ? <Check /> : <Copy />}
-                    {copied ? "Copied" : "Copy inquiry"}
-                  </Button>
-                ) : null}
-                <Button variant="lux" size="xl" onClick={() => setResult(null)}>
-                  Edit inquiry
-                </Button>
-                {result.delivered ? (
                   <Button
                     variant="lux"
                     size="xl"
@@ -181,7 +146,6 @@ export function Contact({ preset }: { preset: InquiryPreset | null }) {
                   >
                     New inquiry
                   </Button>
-                ) : null}
               </div>
             </div>
           ) : (
@@ -191,6 +155,12 @@ export function Contact({ preset }: { preset: InquiryPreset | null }) {
               aria-label="Project inquiry"
               className="rounded-sm border border-border bg-surface p-6 sm:p-10"
             >
+              <div hidden aria-hidden="true">
+                <label htmlFor={id("contactFax")}>Contact fax</label>
+                <input id={id("contactFax")} type="text" tabIndex={-1} autoComplete="off" {...register("contactFax")} />
+              </div>
+              {submitError ? <p role="alert" className="mb-6 text-sm text-destructive">{submitError}</p> : null}
+              {errors.contactFax ? <p role="alert" className="mb-6 text-sm text-destructive">{errors.contactFax.message}</p> : null}
               <div className="grid gap-6 sm:grid-cols-2">
                 <Field label="Name" htmlFor={id("name")} errorId={id("name-error")} error={errors.name?.message}>
                   <Input
@@ -320,11 +290,10 @@ export function Contact({ preset }: { preset: InquiryPreset | null }) {
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-xs leading-relaxed text-muted-foreground sm:max-w-xs">
-                  Online delivery for this form is not connected yet. Submitting checks your details but does
-                  not send them.
+                  {INQUIRY_COPY.privacy}
                 </p>
                 <Button type="submit" variant="hero" size="xl" disabled={isSubmitting}>
-                  Submit inquiry <ArrowRight />
+                  {isSubmitting ? INQUIRY_COPY.submitting : "Submit inquiry"} <ArrowRight />
                 </Button>
               </div>
             </form>

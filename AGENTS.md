@@ -13,4 +13,5 @@
 - Homepage is one scrolling page (`src/routes/index.tsx`) composed from section components in `src/components/site/`; nav uses in-page anchors because the brief asked for section scrolling.
 - All approved/fixed wording (brand, program line, package names, offer terms) lives in `src/content/site.ts`; edit copy there, not inside components, and keep `src/test/inquiry.test.ts` in sync.
 - Inquiry delivery goes through `submitInquiry` in `src/lib/inquiry.ts` — the single integration seam; the UI must reflect its `delivered` result honestly.
+- Inquiry schemas live in `inquiry-schema.ts`; the server function delegates to an anonymous publishable-key insert-only helper, never an admin client, so database grants and RLS remain the security boundary even for direct API access.
 - Campaign colorways are CSS classes (`.campaign-violet`, `.campaign-lime`) in `src/styles.css` that override accent tokens; components only use tokens.
