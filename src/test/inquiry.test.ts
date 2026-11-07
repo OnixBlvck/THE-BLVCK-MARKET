@@ -1,8 +1,12 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as site from "@/content/site";
 import { BRAND, FOUNDING_OFFER, GRAND_OPENING_LINE, PACKAGES, PROGRAM_NAME, RESULT_NAME } from "@/content/site";
 import { PACKAGE_INTEREST_OPTIONS, inquirySchema, submitInquiry } from "@/lib/inquiry";
+
+const { persist } = vi.hoisted(() => ({ persist: vi.fn() }));
+vi.mock("@/lib/inquiry.functions", () => ({ persistInquiry: persist }));
+beforeEach(() => persist.mockReset());
 
 const valid = {
   name: "Jordan Lee",
@@ -87,8 +91,32 @@ describe("Inquiry form", () => {
     }
   });
 
-  it("does not claim delivery while no inbox is connected", async () => {
+  it("only confirms delivery after storage confirms success", async () => {
+    persist.mockResolvedValue({ delivered: true });
     const parsed = inquirySchema.parse(valid);
-    expect(await submitInquiry(parsed)).toEqual({ delivered: false, reason: "not_configured" });
+    expect(await submitInquiry(parsed)).toEqual({ delivered: true });
+    expect(persist).toHaveBeenCalledWith({ data: { ...valid, contactFax: "" } });
+  });
+
+  it("does not confirm a failed insert", async () => {
+    persist.mockResolvedValue({ delivered: false, reason: "storage_failed" });
+    expect(await submitInquiry(inquirySchema.parse(valid))).toEqual({ delivered: false, reason: "storage_failed" });
+  });
+
+  it("handles network failures without a success claim", async () => {
+    persist.mockRejectedValue(new Error("offline"));
+    expect(await submitInquiry(inquirySchema.parse(valid))).toEqual({ delivered: false, reason: "storage_failed" });
+  });
+
+  it("rejects populated honeypots before calling storage", async () => {
+    expect(await submitInquiry({ ...valid, contactFax: "spam" })).toEqual({ delivered: false, reason: "invalid_input" });
+    expect(persist).not.toHaveBeenCalled();
+  });
+
+  it("enforces all maximum field lengths", () => {
+    const limits = { name: 100, business: 120, email: 255, website: 300, message: 2000 };
+    for (const [field, limit] of Object.entries(limits)) {
+      expect(inquirySchema.safeParse({ ...valid, [field]: "x".repeat(limit + 1) }).success).toBe(false);
+    }
   });
 });
