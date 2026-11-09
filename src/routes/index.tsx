@@ -1,16 +1,21 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+
+import type { PackageName } from "@/content/site";
 
 import { Contact, type InquiryPreset } from "@/components/site/Contact";
 import { Hero } from "@/components/site/Hero";
 import { IntroBands } from "@/components/site/IntroBands";
+import { Services } from "@/components/site/Services";
+import { ThreePhaseProgram } from "@/components/site/ThreePhaseProgram";
 import { ServiceColumns } from "@/components/site/ServiceColumns";
 import { SignatureBand } from "@/components/site/SignatureBand";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 
-const TITLE = "BLVCK MARKET — Marketing, Brand Visibility & Creative Promotion";
+const TITLE = "BLVCK MARKET — Brand Visibility, Marketing & The Three-Phase Program";
 const DESCRIPTION =
-  "BLVCK MARKET helps businesses sharpen their presentation, plan campaigns, reach customers, and understand performance. Introducing The Three-Phase Program.";
+  "BLVCK MARKET helps businesses become noticed, understood, seen, and explained through marketing, brand visibility, and creative promotion. The Three-Phase Program: Visibility Upgrade, Complete Takeover, Autopilot.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,7 +34,12 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const preset: InquiryPreset | null = null;
+  const [preset, setPreset] = useState<InquiryPreset | null>(null);
+
+  const requestProposal = (pkg: PackageName) => {
+    setPreset({ packageInterest: pkg, nonce: Date.now() });
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <>
@@ -43,7 +53,9 @@ function Index() {
       <main id="main">
         <Hero />
         <IntroBands />
+        <ThreePhaseProgram />
         <ServiceColumns />
+        <Services onRequestProposal={requestProposal} />
         <SignatureBand />
         <Contact preset={preset} />
       </main>
