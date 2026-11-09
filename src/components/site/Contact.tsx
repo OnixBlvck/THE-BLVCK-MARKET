@@ -73,7 +73,7 @@ export function Contact({ preset }: { preset: InquiryPreset | null }) {
     formState: { errors, isSubmitting },
   } = useForm<InquiryInput, unknown, Inquiry>({
     resolver: zodResolver(inquirySchema),
-    defaultValues: { name: "", business: "", email: "", website: "", message: "", foundingOffer: false, contactFax: "" },
+    defaultValues: { name: "", business: "", email: "", website: "", message: "", contactFax: "" },
   });
 
   useEffect(() => {
