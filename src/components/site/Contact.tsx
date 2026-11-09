@@ -21,7 +21,6 @@ import { SectionHeading } from "./SectionHeading";
 
 export type InquiryPreset = {
   packageInterest?: (typeof PACKAGE_INTEREST_OPTIONS)[number];
-  foundingOffer?: boolean;
   nonce: number;
 };
 
@@ -81,7 +80,6 @@ export function Contact({ preset }: { preset: InquiryPreset | null }) {
     if (!preset) return;
     setResult(null);
     if (preset.packageInterest) setValue("packageInterest", preset.packageInterest, { shouldValidate: false });
-    if (preset.foundingOffer !== undefined) setValue("foundingOffer", preset.foundingOffer);
   }, [preset, setValue]);
 
   useEffect(() => {
@@ -115,7 +113,7 @@ export function Contact({ preset }: { preset: InquiryPreset | null }) {
             intro="Share where your business is now and where you want it to go. We'll come back with a proposal shaped around your goals."
           />
           <ul className="mt-10 space-y-3 text-sm text-muted-foreground">
-            {["Every proposal is scoped to your business", "No pricing until we understand the work", "Founding offer: ask in your message or tick the box"].map((t) => (
+            {["Every proposal is scoped to your business", "No pricing until we understand the work", "Tell us which package interests you — or that you are not sure yet"].map((t) => (
               <li key={t} className="flex gap-3">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary-glow" aria-hidden="true" />
                 {t}
@@ -271,21 +269,6 @@ export function Contact({ preset }: { preset: InquiryPreset | null }) {
                   </Field>
                 </div>
 
-                <label
-                  htmlFor={id("founding")}
-                  className="flex cursor-pointer items-start gap-3 rounded-sm border border-border p-4 transition-colors hover:border-gold/50 sm:col-span-2"
-                >
-                  <input
-                    id={id("founding")}
-                    type="checkbox"
-                    className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[var(--gold)]"
-                    {...register("foundingOffer")}
-                  />
-                  <span className="text-sm leading-relaxed text-muted-foreground">
-                    <span className="text-foreground">I'd like founding-client consideration.</span> First 10
-                    participating businesses — 20% off the first qualifying package.
-                  </span>
-                </label>
               </div>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

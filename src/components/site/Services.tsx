@@ -7,13 +7,13 @@ import { SectionHeading } from "./SectionHeading";
 
 export function Services({ onRequestProposal }: { onRequestProposal: (pkg: PackageName) => void }) {
   return (
-    <section id="services" aria-labelledby="services-title" className="relative border-t border-border bg-ink">
+    <section id="packages" aria-labelledby="packages-title" className="relative border-t border-border bg-ink">
       <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHeading
-            id="services-title"
-            index="03"
-            eyebrow="Services"
+            id="packages-title"
+            index="04"
+            eyebrow="Packages"
             title="Three ways in. Pick your weight class."
             intro="The Three-Phase Program is offered in three packages. Every engagement is scoped to your business. Request a proposal and we will come back with a clear plan and pricing for your situation."
           />
