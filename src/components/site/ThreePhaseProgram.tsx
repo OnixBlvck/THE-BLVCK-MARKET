@@ -76,9 +76,6 @@ export function ThreePhaseProgram() {
                 Enter the program <ArrowRight />
               </a>
             </Button>
-            <Button asChild variant="gold" size="xl">
-              <a href="#founding">Ask about the founding offer</a>
-            </Button>
           </div>
         </Reveal>
 

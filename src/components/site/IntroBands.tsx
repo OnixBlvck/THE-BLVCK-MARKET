@@ -18,13 +18,13 @@ export function IntroBands() {
           </OutlineLink>
         </section>
 
-        <section id="program" aria-labelledby="program-title" className="border-t border-border px-5 py-10 sm:px-8 md:border-t-0 lg:px-14">
+        <section id="program-intro" aria-labelledby="program-intro-title" className="border-t border-border px-5 py-10 sm:px-8 md:border-t-0 lg:px-14">
           <BandLabel>{PROGRAM_BAND.label}</BandLabel>
-          <h2 id="program-title" className={`${serifHeading} mt-4 text-2xl lg:text-[2rem]`}>
+          <h2 id="program-intro-title" className={`${serifHeading} mt-4 text-2xl lg:text-[2rem]`}>
             {PROGRAM_BAND.heading}
           </h2>
           <p className="mt-4 max-w-md text-xs leading-relaxed text-muted-foreground">{PROGRAM_BAND.body}</p>
-          <OutlineLink href="#contact" className="mt-5">
+          <OutlineLink href="#program" className="mt-5">
             {PROGRAM_BAND.cta}
           </OutlineLink>
           <div className="mt-6 flex gap-2" aria-hidden="true">

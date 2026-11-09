@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as site from "@/content/site";
-import { BRAND, FOUNDING_OFFER, GRAND_OPENING_LINE, PACKAGES, PROGRAM_NAME, RESULT_NAME } from "@/content/site";
+import { BRAND, GRAND_OPENING_LINE, PACKAGES, PROGRAM_NAME, RESULT_NAME } from "@/content/site";
 import { PACKAGE_INTEREST_OPTIONS, inquirySchema, submitInquiry } from "@/lib/inquiry";
 
 const { persist } = vi.hoisted(() => ({ persist: vi.fn() }));
@@ -57,9 +57,11 @@ describe("BLVCK MARKET content rules", () => {
     expect(PACKAGES.map((p) => p.name)).not.toContain(RESULT_NAME);
   });
 
-  it("states the founding offer terms exactly", () => {
-    expect(FOUNDING_OFFER.eligibility).toBe("First 10 participating businesses");
-    expect(FOUNDING_OFFER.discount).toBe("20% off the first qualifying package");
+  it("shows no founding discount or eligibility claims", () => {
+    const sources = import.meta.glob(["/src/components/site/*.tsx", "/src/content/*.ts", "/src/routes/*.tsx"], { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+    for (const [file, src] of Object.entries(sources)) {
+      expect(src, file).not.toMatch(/20% off|first 10 participating|founding/i);
+    }
   });
 });
 

@@ -8,7 +8,7 @@
  * - VONTEVISUALZ is the creative partner / production hub.
  *
  * Approved, fixed wording: brand name, affiliation lockup, program name,
- * the three package names, and the founding-offer terms.
+ * and the three package names.
  * Everything else is draft homepage marketing copy — not an established
  * slogan or quotation — and can be revised freely.
  */
@@ -199,8 +199,3 @@ export const REPORT_ITEMS = [
   { title: "Competitor observations", body: "What comparable businesses are doing in your market." },
   { title: "Next-step recommendations", body: "Clear, evidence-based moves for the next phase." },
 ];
-
-export const FOUNDING_OFFER = {
-  eligibility: "First 10 participating businesses",
-  discount: "20% off the first qualifying package",
-};

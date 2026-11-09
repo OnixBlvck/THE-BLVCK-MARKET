@@ -81,11 +81,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#07080b" },
       { name: "color-scheme", content: "dark" },
       { title: "BLVCK MARKET" },
-      { name: "description", content: "BLVCK MARKET — marketing, brand visibility, and creative promotion." },
+      { name: "description", content: "BLVCK MARKET — marketing, brand visibility, and creative promotion through The Three-Phase Program." },
       { property: "og:title", content: "BLVCK MARKET" },
       {
         property: "og:description",
-        content: "BLVCK MARKET — marketing, brand visibility, and creative promotion.",
+        content: "BLVCK MARKET — marketing, brand visibility, and creative promotion through The Three-Phase Program.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
